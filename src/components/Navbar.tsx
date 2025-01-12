@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Grid, Box, Users, Shop, Menu } from "lucide-react";
+import { Grid, Box, Users, Store, Menu } from "lucide-react";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -10,7 +10,7 @@ export const Navbar = () => {
   const navItems = [
     { icon: Grid, label: "Dashboard", path: "/" },
     { icon: Box, label: "Products", path: "/products" },
-    { icon: Shop, label: "Shops", path: "/shops" },
+    { icon: Store, label: "Shops", path: "/shops" },
     { icon: Users, label: "Customers", path: "/customers" },
   ];
 
