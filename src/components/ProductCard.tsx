@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: number;
@@ -9,15 +8,14 @@ interface ProductCardProps {
   price: number;
   image: string;
   availability: number;
+  onClick?: () => void;
 }
 
-export const ProductCard = ({ id, name, category, price, image, availability }: ProductCardProps) => {
-  const navigate = useNavigate();
-
+export const ProductCard = ({ id, name, category, price, image, availability, onClick }: ProductCardProps) => {
   return (
     <Card 
       className="product-card glass-card cursor-pointer w-full" 
-      onClick={() => navigate(`/product/${id}`)}
+      onClick={onClick}
     >
       <CardContent className="p-4">
         <div className="flex items-center space-x-6">

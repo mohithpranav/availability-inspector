@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Shops from "./pages/Shops";
 import ShopDetail from "./pages/ShopDetail";
+import EditProductPrice from "./pages/EditProductPrice";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/shops" element={<Shops />} />
               <Route path="/shop/:id" element={<ShopDetail />} />
+              <Route path="/shop/:shopId/product/:productId" element={<EditProductPrice />} />
               <Route path="/customers" element={<div>Customers Page (Coming Soon)</div>} />
             </Routes>
           </div>
