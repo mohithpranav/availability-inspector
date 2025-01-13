@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Grid, Box, Users, Store, Menu, Sun, Moon } from "lucide-react";
+import { Grid, Box, Users, Store, Menu, Sun, Moon, UserCircle } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 export const Navbar = () => {
@@ -14,6 +14,7 @@ export const Navbar = () => {
     { icon: Box, label: "Products", path: "/products" },
     { icon: Store, label: "Shops", path: "/shops" },
     { icon: Users, label: "Customers", path: "/customers" },
+    { icon: UserCircle, label: "Employees", path: "/employees" },
   ];
 
   const NavContent = () => (

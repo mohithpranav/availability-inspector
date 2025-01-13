@@ -26,47 +26,43 @@ export const ProductCard = ({ id, name, category, price, image, availability, on
 
   return (
     <Card 
-      className="product-card glass-card cursor-pointer w-full" 
+      className="product-card glass-card cursor-pointer w-full h-24" 
       onClick={onClick}
     >
-      <CardContent className="p-4">
-        <div className="flex flex-col md:flex-row md:items-center md:space-x-6">
-          <div className="relative h-24 w-24 flex-shrink-0 mb-4 md:mb-0">
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover rounded-md"
-              loading="lazy"
-            />
-          </div>
-          <div className="flex-grow">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-              <div className="space-y-2 mb-2 md:mb-0">
-                <h3 className="text-xl font-medium">{name}</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">
-                    {category}
-                  </Badge>
-                  <Badge 
-                    variant={availability > 0 ? "default" : "destructive"}
-                  >
-                    {availability > 0 ? "In Stock" : "Out of Stock"}
-                  </Badge>
-                </div>
-              </div>
-              <div className="flex flex-col items-start md:items-end gap-2">
-                <span className="text-2xl font-semibold">${price}</span>
-                {isInShopDetail && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handlePriceEdit}
-                  >
-                    Change Price
-                  </Button>
-                )}
-              </div>
+      <CardContent className="p-4 h-full">
+        <div className="flex items-center space-x-4 h-full">
+          <img
+            src={image}
+            alt={name}
+            className="w-16 h-16 object-cover rounded-md flex-shrink-0"
+            loading="lazy"
+          />
+          <div className="flex-grow min-w-0">
+            <h3 className="text-lg font-medium truncate">{name}</h3>
+            <div className="flex flex-wrap gap-2 mt-1">
+              <Badge variant="secondary" className="text-xs">
+                {category}
+              </Badge>
+              <Badge 
+                variant={availability > 0 ? "default" : "destructive"}
+                className="text-xs"
+              >
+                {availability > 0 ? "In Stock" : "Out of Stock"}
+              </Badge>
             </div>
+          </div>
+          <div className="flex flex-col items-end justify-between h-full flex-shrink-0">
+            <span className="text-lg font-semibold">${price}</span>
+            {isInShopDetail && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePriceEdit}
+                className="mt-2"
+              >
+                Change Price
+              </Button>
+            )}
           </div>
         </div>
       </CardContent>
