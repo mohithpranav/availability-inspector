@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ProductCardProps {
   id: number;
@@ -12,6 +14,14 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ id, name, category, price, image, availability, onClick }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const { id: shopId } = useParams();
+
+  const handlePriceEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/shop/${shopId}/product/${id}`);
+  };
+
   return (
     <Card 
       className="product-card glass-card cursor-pointer w-full" 
@@ -41,7 +51,16 @@ export const ProductCard = ({ id, name, category, price, image, availability, on
                   {availability > 0 ? "In Stock" : "Out of Stock"}
                 </Badge>
               </div>
-              <span className="text-2xl font-semibold">${price}</span>
+              <div className="flex flex-col items-end gap-2">
+                <span className="text-2xl font-semibold">${price}</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePriceEdit}
+                >
+                  Change Price
+                </Button>
+              </div>
             </div>
           </div>
         </div>
