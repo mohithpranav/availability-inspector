@@ -11,6 +11,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Shops from "./pages/Shops";
 import ShopDetail from "./pages/ShopDetail";
 import EditProductPrice from "./pages/EditProductPrice";
+import AddProduct from "./pages/AddProduct";
 import Customers from "./pages/Customers";
 import Employees from "./pages/Employees";
 
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/shops" element={<Shops />} />
               <Route path="/shop/:id" element={<ShopDetail />} />
+              <Route path="/shop/:shopId/add-product" element={<AddProduct />} />
               <Route path="/shop/:shopId/product/:productId" element={<EditProductPrice />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/employees" element={<Employees />} />

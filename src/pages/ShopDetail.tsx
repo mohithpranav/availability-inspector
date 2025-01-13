@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Store, Phone, MapPin } from "lucide-react";
+import { Store, Phone, MapPin, Plus } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
 
 // Mock data - replace with actual data source later
 const mockShops = [
@@ -72,9 +73,15 @@ const ShopDetail = () => {
     <div className="container mx-auto p-6">
       <div className="mb-8">
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Store className="h-6 w-6" />
-            <h1 className="text-2xl font-bold">{shop.name}</h1>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Store className="h-6 w-6" />
+              <h1 className="text-2xl font-bold">{shop.name}</h1>
+            </div>
+            <Button onClick={() => navigate(`/shop/${id}/add-product`)}>
+              <Plus className="mr-2 h-4 w-4" />
+              Add Product
+            </Button>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-muted-foreground">
