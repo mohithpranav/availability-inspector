@@ -5,10 +5,33 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+// Mock data - replace with actual data source later
+const mockShops = [
+  {
+    id: 1,
+    name: "Downtown Store",
+    products: [
+      { id: 1, name: "Product 1", price: 19.99 },
+      { id: 2, name: "Product 2", price: 29.99 },
+    ],
+  },
+  {
+    id: 2,
+    name: "Uptown Market",
+    products: [
+      { id: 3, name: "Product 3", price: 39.99 },
+      { id: 4, name: "Product 4", price: 49.99 },
+    ],
+  },
+];
+
 const EditProductPrice = () => {
   const { shopId, productId } = useParams();
   const navigate = useNavigate();
   const [price, setPrice] = useState("");
+
+  const shop = mockShops.find((s) => s.id === Number(shopId));
+  const product = shop?.products.find((p) => p.id === Number(productId));
 
   const handleUpdatePrice = () => {
     // Here you would typically make an API call to update the price
@@ -16,10 +39,18 @@ const EditProductPrice = () => {
     navigate(`/shop/${shopId}`);
   };
 
+  if (!shop || !product) {
+    return <div className="container mx-auto p-6">Shop or product not found</div>;
+  }
+
   return (
     <div className="container mx-auto p-6">
       <Card>
         <CardHeader>
+          <div className="space-y-2">
+            <span className="text-sm text-muted-foreground">Shop</span>
+            <h2 className="text-xl font-semibold">{shop.name}</h2>
+          </div>
           <CardTitle>Edit Product Price</CardTitle>
         </CardHeader>
         <CardContent>
