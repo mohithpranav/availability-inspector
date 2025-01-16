@@ -24,10 +24,18 @@ export const ProductCard = ({ id, name, category, price, image, availability, on
     navigate(`/shop/${shopId}/product/${id}`);
   };
 
+  const handleProductClick = () => {
+    if (onClick) {
+      onClick();
+    } else if (!isInShopDetail) {
+      navigate(`/product/${id}`);
+    }
+  };
+
   return (
     <Card 
       className="product-card glass-card cursor-pointer w-full h-24" 
-      onClick={onClick}
+      onClick={handleProductClick}
     >
       <CardContent className="p-4 h-full">
         <div className="flex items-center space-x-4 h-full">
