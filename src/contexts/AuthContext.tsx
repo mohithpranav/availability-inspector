@@ -25,11 +25,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (email: string, password: string) => {
     const foundUser = mockUsers.find(
-      (u) => u.email === email && u.password === password
+      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
     );
+    
     if (foundUser) {
-      const { password: _, ...userWithoutPassword } = foundUser;
-      setUser(userWithoutPassword);
+      const { password: _, email: __, ...userWithoutSensitiveInfo } = foundUser;
+      setUser(userWithoutSensitiveInfo);
     }
   };
 
