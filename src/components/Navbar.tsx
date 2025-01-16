@@ -1,21 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Grid, Box, Users, Store, Menu, Sun, Moon, UserCircle } from "lucide-react";
+import { Grid, Box, Users, Store, Menu, Sun, Moon, UserCircle, LogOut } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const navItems = [
+  const adminNavItems = [
     { icon: Grid, label: "Dashboard", path: "/" },
     { icon: Box, label: "Products", path: "/products" },
     { icon: Store, label: "Shops", path: "/shops" },
     { icon: Users, label: "Customers", path: "/customers" },
     { icon: UserCircle, label: "Employees", path: "/employees" },
   ];
+
+  const employeeNavItems = [
+    { icon: Grid, label: "Dashboard", path: "/employee-dashboard" },
+    { icon: Box, label: "Products", path: "/products" },
+    { icon: Store, label: "Shops", path: "/shops" },
+  ];
+
+  const navItems = user?.role === "admin" ? adminNavItems : employeeNavItems;
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   const NavContent = () => (
     <div className="flex flex-col md:flex-row gap-4">
@@ -33,11 +49,13 @@ export const Navbar = () => {
     </div>
   );
 
+  if (!user) return null;
+
   return (
     <nav className="border-b dark:border-gray-800">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold">
-          Admin Dashboard
+        <Link to={user.role === "admin" ? "/" : "/employee-dashboard"} className="text-xl font-bold">
+          {user.role === "admin" ? "Admin Dashboard" : "Employee Dashboard"}
         </Link>
 
         <div className="flex items-center gap-4">
@@ -57,6 +75,11 @@ export const Navbar = () => {
             ) : (
               <Sun className="h-5 w-5" />
             )}
+          </Button>
+
+          {/* Logout Button */}
+          <Button variant="ghost" size="icon" onClick={handleLogout}>
+            <LogOut className="h-5 w-5" />
           </Button>
 
           {/* Mobile Navigation */}
