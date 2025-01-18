@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { ShopAvailability } from "@/components/ShopAvailability";
 import {
   Dialog,
   DialogContent,
@@ -24,6 +25,31 @@ import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+
+// Mock shops data
+const mockShops = [
+  {
+    id: 1,
+    name: "Downtown Store",
+    location: "123 Main St, Downtown",
+    price: 299.99,
+    stock: 15,
+  },
+  {
+    id: 2,
+    name: "Uptown Market",
+    location: "456 High St, Uptown",
+    price: 289.99,
+    stock: 8,
+  },
+  {
+    id: 3,
+    name: "West Side Shop",
+    location: "789 West Ave",
+    price: 309.99,
+    stock: 0,
+  },
+];
 
 // Form schema for product editing
 const productSchema = z.object({
